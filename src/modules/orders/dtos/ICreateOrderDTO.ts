@@ -1,10 +1,5 @@
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
-
-interface IProduct {
-  product_id: string;
-  price: number;
-  quantity: number;
-}
+import IProduct from '@modules/products/dtos/IProduct';
 
 export default interface ICreateOrderDTO {
   customer: Customer;

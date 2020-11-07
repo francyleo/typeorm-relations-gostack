@@ -1,13 +1,12 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-} from 'typeorm';
-
 import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 
 @Entity('products')
 class Product {
@@ -17,13 +16,13 @@ class Product {
   @Column()
   name: string;
 
-  @Column('numeric')
+  @Column('decimal')
   price: number;
 
-  @Column('numeric')
+  @Column('int')
   quantity: number;
 
-  @OneToMany(() => OrdersProducts, orderProduct => orderProduct.product)
+  @OneToMany(() => OrdersProducts, order_product => order_product.product)
   order_products: OrdersProducts[];
 
   @CreateDateColumn()

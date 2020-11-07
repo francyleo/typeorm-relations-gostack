@@ -1,39 +1,38 @@
-import {
-  Entity,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  JoinColumn,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-} from 'typeorm';
-
 import Order from '@modules/orders/infra/typeorm/entities/Order';
 import Product from '@modules/products/infra/typeorm/entities/Product';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 
 @Entity('orders_products')
 class OrdersProducts {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @ManyToOne(() => Order, order => order.id)
-  @JoinColumn({ name: 'order_id', referencedColumnName: 'id' })
+  @ManyToOne(() => Order, order => order.order_products)
+  @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @ManyToOne(() => Product, product => product.id)
-  @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
+  @ManyToOne(() => Product, product => product.order_products)
+  @JoinColumn({ name: 'product_id' })
   product: Product;
 
-  @Column('uuid')
+  @Column()
   product_id: string;
 
-  @Column('uuid')
+  @Column()
   order_id: string;
 
-  @Column('numeric')
+  @Column('decimal')
   price: number;
 
-  @Column('numeric')
+  @Column('int')
   quantity: number;
 
   @CreateDateColumn()
